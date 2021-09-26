@@ -1,0 +1,2 @@
+docker run --name=banking-db -e POSTGRES_PASSWORD='qwerty' -p 5434:5432 -d --rm postgres
+migrate -path ./autumn-2021-intern-assignment/schema -database 'postgres://postgres:qwerty@localhost:5434/postgres?sslmode=disable' up
