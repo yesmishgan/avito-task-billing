@@ -12,10 +12,6 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"os"
-
-
-	//"github.com/spf13/viper"
-	//"github.com/yesmishgan/autumn-2021-intern-assignment"
 )
 
 func main() {
