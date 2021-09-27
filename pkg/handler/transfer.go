@@ -7,5 +7,6 @@ func (h *Handler) transferMoney(c *fiber.Ctx) error{
 }
 
 func (h *Handler) writeOff(c *fiber.Ctx) error{
+
 	return nil
 }

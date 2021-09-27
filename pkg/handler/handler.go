@@ -18,7 +18,7 @@ func NewHandler(services *service.Service) *Handler{
 func (h *Handler) InitRoutes() *fiber.App{
 	router := fiber.New()
 	router.Use(logger.New(logger.Config{
-		Format:     "[${time}][${ip}]:${port} ${status} - ${method} ${path}\n",
+		Format:     "[${time}][${ip}]:$t{port} ${status} - ${method} ${path}\n",
 		Output: os.Stdout,
 	}))
 
@@ -26,7 +26,7 @@ func (h *Handler) InitRoutes() *fiber.App{
 	{
 		info := api.Group("/info")
 		{
-			info.Get("/balance", h.getBalance)
+			info.Post("/balance", h.getBalance)
 
 		}
 		transaction := api.Group("/transaction")

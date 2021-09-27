@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,7 +14,6 @@ type statusResponse struct {
 }
 
 func newErrorResponse(c *fiber.Ctx, statusCode int, message string){
-	c.JSON(fiber.Map{
-
-	})
+	fmt.Println("S")
+	c.Status(statusCode).JSON(errorResponse{"hey"})
 }
