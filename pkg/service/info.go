@@ -13,6 +13,6 @@ func NewInfoService(repo repository.Info) *InfoService {
 	return &InfoService{repo: repo}
 }
 
-func (i *InfoService) GetBalance(username string, currency string) (cashbox.Account, error) {
-	return i.repo.GetBalance(username, currency)
+func (i *InfoService) GetBalance(username string) (cashbox.Account, error) {
+	return i.repo.GetBalance(username)
 }

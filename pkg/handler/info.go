@@ -11,14 +11,12 @@ import (
 func (h *Handler) getBalance(c *fiber.Ctx) error{
 	var input cashbox.User
 	if err := c.BodyParser(&input); err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return err
+		return newErrorResponse(c, http.StatusInternalServerError, err.Error())
 	}
 
-	result, err := h.services.GetBalance(input.Username, "RUB")
+	result, err := h.services.GetBalance(input.Username)
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return err
+		return newErrorResponse(c, http.StatusInternalServerError, err.Error())
 	}
 
 	c.Status(http.StatusOK).JSON(result)

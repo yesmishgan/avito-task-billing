@@ -10,7 +10,7 @@ type Transaction interface {
 }
 
 type Info interface {
-	GetBalance(username string, currency string) (cashbox.Account, error)
+	GetBalance(username string) (cashbox.Account, error)
 }
 
 type Repository struct {
