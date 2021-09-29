@@ -1,6 +1,9 @@
 package service
 
-import "cashbox/pkg/repository"
+import (
+	"cashbox"
+	"cashbox/pkg/repository"
+)
 
 type TransactionService struct {
 	repo repository.Transaction
@@ -8,4 +11,8 @@ type TransactionService struct {
 
 func NewTransactionService(repo repository.Transaction) *TransactionService {
 	return &TransactionService{repo: repo}
+}
+
+func (t *TransactionService) Write(bill cashbox.Bill) error{
+	return t.repo.Write(bill)
 }

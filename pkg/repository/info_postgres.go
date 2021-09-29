@@ -14,11 +14,11 @@ func NewInfoPostgres(db *sqlx.DB) *InfoPostgres {
 	return &InfoPostgres{db: db}
 }
 
-func (i *InfoPostgres) GetBalance(username string) (cashbox.Account, error) {
+func (i *InfoPostgres) GetBalance(user cashbox.User) (cashbox.Account, error) {
 	var account cashbox.Account
 
 	query := fmt.Sprintf("SELECT balance FROM %s WHERE username = $1", clientsTable)
-	err := i.db.Get(&account, query, username)
+	err := i.db.Get(&account, query, user.Username)
 
 	return account, err
 }

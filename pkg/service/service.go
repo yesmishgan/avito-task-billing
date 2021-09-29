@@ -6,11 +6,11 @@ import (
 )
 
 type Transaction interface {
-
+	Write(bill cashbox.Bill) error
 }
 
 type Info interface {
-	GetBalance(username string) (cashbox.Account, error)
+	GetBalance(user cashbox.User) (cashbox.Account, error)
 	//GetActions(username string)
 }
 

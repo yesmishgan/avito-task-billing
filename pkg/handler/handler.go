@@ -27,11 +27,11 @@ func (h *Handler) InitRoutes() *fiber.App{
 		info := api.Group("/info")
 		{
 			info.Post("/balance", h.getBalance)
-
+			info.Post("/history", h.getHistory)
 		}
 		transaction := api.Group("/transaction")
 		{
-			transaction.Post("/transfer", h.transferMoney)
+			transaction.Put("/transfer", h.transferMoney)
 			transaction.Post("/write", h.writeOff)
 		}
 	}
