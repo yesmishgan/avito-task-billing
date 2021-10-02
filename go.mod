@@ -13,6 +13,7 @@ require (
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/lib/pq v1.10.3 // indirect
+	github.com/pkg/errors v0.8.1 // indirect
 	github.com/spf13/viper v1.9.0 // indirect
 	github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8 // indirect
 	github.com/valyala/fasthttp v1.30.0 // indirect

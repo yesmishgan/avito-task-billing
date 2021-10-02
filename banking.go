@@ -1,9 +1,9 @@
 package cashbox
 
 type Bill struct {
-	Username    string `json:"username"`
-	Amount      int    `json:"amount"`
-	Flag        bool   `json:"flag"`
+	Username    string `json:"username" binding:"required"`
+	Amount      int    `json:"amount" binding:"required"`
+	Flag        bool   `json:"flag" binding:"required"`
 	Description string `json:"description"`
 }
 

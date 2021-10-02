@@ -21,19 +21,17 @@ CREATE TABLE clients_transactions
     transaction_id int references transactions (id) on delete cascade not null
 );
 
-CREATE
-OR REPLACE FUNCTION write(name_client VARCHAR(255), amount INTEGER) returns int
+CREATE or replace FUNCTION write(name_client VARCHAR(255), amount INTEGER) returns int
 language plpgsql AS
-$$
+$id_client$
 declare
 id_client integer;
 BEGIN
-    if
-EXISTS (SELECT 1 FROM clients WHERE username = name_client) then
-UPDATE clients
-SET balance = balance + amount
-WHERE username = name_client;
-else
+    if EXISTS (SELECT 1 FROM clients WHERE username = name_client) then
+        UPDATE clients
+        SET balance = balance + amount
+        WHERE username = name_client;
+    else
         INSERT INTO clients (username, balance)
         VALUES (name_client, amount);
 END if;
@@ -43,27 +41,4 @@ from clients
 where username = name_client;
 return id_client;
 
-END; $$
-
-/*
-CREATE OR REPLACE FUNCTION write(name_client VARCHAR(255), amount INTEGER) returns int
-language plpgsql AS
-$$
-declare
-id_client integer;
-BEGIN
-    if EXISTS (SELECT 1 FROM clients WHERE username = name_client) then
-        UPDATE clients SET balance = balance + amount
-        WHERE username = name_client;
-    else
-        INSERT INTO clients (username, balance)
-        VALUES (name_client, amount);
-    END if;
-select id into id_client
-from clients
-where username = name_client;
-return id_client;
-
-END; $$
-
- */
+END; $id_client$;
