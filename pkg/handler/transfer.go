@@ -7,7 +7,16 @@ import (
 )
 
 func (h *Handler) transferMoney(c *fiber.Ctx) error{
+	var input cashbox.Transfer
+	if err := c.BodyParser(&input); err != nil{
+		return newErrorResponse(c, http.StatusInternalServerError, err.Error())
+	}
 
+	if err := h.services.Transfer(input); err != nil {
+		return newErrorResponse(c, http.StatusInternalServerError, err.Error())
+	}
+
+	c.Status(http.StatusOK)
 	return nil
 }
 

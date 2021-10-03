@@ -7,6 +7,7 @@ import (
 
 type Transaction interface {
 	Write(bill cashbox.Bill) error
+	Transfer(transfer cashbox.Transfer) error
 }
 
 type Info interface {

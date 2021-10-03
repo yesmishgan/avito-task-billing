@@ -16,3 +16,7 @@ func NewTransactionService(repo repository.Transaction) *TransactionService {
 func (t *TransactionService) Write(bill cashbox.Bill) error{
 	return t.repo.Write(bill)
 }
+
+func (t *TransactionService) Transfer(transfer cashbox.Transfer) error{
+	return t.repo.Transfer(transfer)
+}

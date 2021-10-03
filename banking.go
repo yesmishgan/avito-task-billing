@@ -1,5 +1,12 @@
 package cashbox
 
+type Transfer struct {
+	Description string `json:"description"`
+	Amount int `json:"amount"`
+	Username string `json:"username"`
+	Destination string `json:"destination"`
+}
+
 type Bill struct {
 	Username    string `json:"username" binding:"required"`
 	Amount      int    `json:"amount" binding:"required"`
@@ -12,5 +19,5 @@ type User struct {
 }
 
 type Account struct {
-	Balance int `json:"balance" db:"balance"`
+	Balance float32 `json:"balance" db:"balance"`
 }
