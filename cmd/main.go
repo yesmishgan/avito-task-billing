@@ -5,6 +5,7 @@ import (
 	"cashbox/pkg/handler"
 	"cashbox/pkg/repository"
 	"cashbox/pkg/service"
+	"context"
 	"fmt"
 	"github.com/gofiber/adaptor/v2"
 	"github.com/joho/godotenv"
@@ -12,6 +13,8 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -43,10 +46,26 @@ func main() {
 	handlers := handler.NewHandler(services)
 
 	srv := new(cashbox.Server)
-	if err := srv.Run(viper.GetString("port"), adaptor.FiberApp(handlers.InitRoutes())); err != nil{
-		logger.Fatal(fmt.Sprintf("error occured while running http server: %s", err.Error()))
+	go func() {
+		if err := srv.Run(viper.GetString("port"), adaptor.FiberApp(handlers.InitRoutes())); err != nil {
+			logger.Fatal(fmt.Sprintf("error occured while running http server: %s", err.Error()))
+		}
+	}()
+	logger.Info("TodoApp Started")
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+
+	<-quit
+
+	logger.Info("TodoApp Shutting down")
+
+	if err := srv.Shutdown(context.Background()); err != nil{
+		logger.Error(fmt.Sprintf("error occured on server shutting down: %s", err.Error()))
 	}
-	fmt.Println("test")
+	if err := db.Close(); err != nil{
+		logger.Error(fmt.Sprintf("error occured on db connection close: %s", err.Error()))
+	}
 }
 
 func InitConfig() error {
